@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom"
 import Header from "./components/Header"
 import PostContainer from "./components/PostContainer"
 import SideBarContact from "./components/SideBarContact"
@@ -10,10 +11,7 @@ function App() {
     <div className="min-h-screen bg-yellow-100">
       <Header />
       <main className="relative flex bg-gray-100 border pt-14">
-
-        <SidebarMenu />
-        <PostContainer />
-        <SideBarContact />
+        <Outlet />
       </main>
     </div>
   )

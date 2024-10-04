@@ -1,5 +1,5 @@
 import defaultAvatar from '../assets/avatar-sloth.png'
-// import { DropdownArrow } from '../icons'
+import { DropdownArrow } from '../icons'
 
 export default function Avatar(props) {
 	const {imgSrc, menu , ...restProps } = props
@@ -8,9 +8,9 @@ export default function Avatar(props) {
 			<div {...restProps}>
 				<img src={imgSrc ?? defaultAvatar} />
 			</div>
-			{/* { menu && 
+			{ menu && 
 					<DropdownArrow className="absolute -bottom-2 -right-1 w-4"/>
-			} */}
+			}
 		</div>
 	)
 }

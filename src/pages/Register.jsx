@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 export default function Register() {
 
@@ -24,6 +25,7 @@ export default function Register() {
 
             const result = await axios.post("http://localhost:8000/auth/register", input)
             console.log(result.data)
+            toast.success("register success")
             e.target.closest('dialog').close()
             setInput({
                 identity: '',
@@ -36,6 +38,7 @@ export default function Register() {
         } catch (error) {
             const errMsg = error.response?.data.error || error.message
             console.log(errMsg)
+            toast.error(errMsg)
         }
     }
 

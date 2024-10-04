@@ -2,6 +2,8 @@ import React from 'react'
 import { SearchIcon } from '../icons'
 
 export default function SideBarContact() {
+
+
     return (
         <div className="fixed top-14 right-0 h-full w-[350px] overflow-auto flex flex-col gap-2 pt-4 px-2 max-xl:hidden">
             <div className="flex justify-between text-gray-500">
