@@ -1,5 +1,6 @@
 import React from 'react'
 import { FacebookLogo, GroupIcon, HomeIcon, MenuIcon, MessengerIcon, NotificationIcon, PlayIcon, SearchIcon, ShopIcon } from '../icons'
+import Avatar from './Avatar'
 
 export default function Header() {
 	return (
@@ -49,11 +50,13 @@ export default function Header() {
 				</div>
 				<div className="dropdown dropdown-end mt-2">
 					<div tabIndex={0} role="button" className="">
-						<div className="avatar">
+						{/* <div className="avatar">
 							<div className="w-10 h-10 rounded-full">
 								<img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
 							</div>
-						</div>
+						</div> */}
+						<Avatar className="w-11 h-11 rounded-full"
+						imgSrc="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"/>
 					</div>
 					<ul tabIndex={0} className="dropdown-content menu bg-base-200 rounded-box z-[1] w-52 p-2 shadow">
 						<li><a>Logout</a></li>
