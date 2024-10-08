@@ -5,12 +5,15 @@ const usePostStore = create( (set, get) => ({
 	posts : [],
 	currentPost : null,
 	loading: false,
-	createPost : async (body, token) => {
+	createPost : async (body, token, user) => {
 		const rs = await axios.post('http://localhost:8000/post', body , {
 			headers : { Authorization : `Bearer ${token}`}
 		})
+		console.log(rs)
+		set(state => ({
+			posts : [ {...rs.data, user}, ...state.posts]
+		}))
 		
-		return rs.data
 	},
 	getAllPosts : async (token) => {
 		set({loading: true})
@@ -18,6 +21,17 @@ const usePostStore = create( (set, get) => ({
 			headers : { Authorization : `Bearer ${token}`}
 		})
 		set({ posts: rs.data.posts , loading: false})
+	},
+	deletePost : async( token, id) => {
+		const rs = await axios.delete(`http://localhost:8000/post/${id}`, {
+			headers : {Authorization : `Bearer ${token}`}
+		})
+		set(state => ({
+			posts: state.posts.filter(el => el.id !== id)
+		}))
+	},
+	setCurrentPost : (post) => {
+		set({currentPost : post})
 	}
 }))
 

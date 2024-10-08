@@ -7,12 +7,13 @@ import { toast } from 'react-toastify'
 import usePostStore from '../stores/postStore'
 import AddPicture from './AddPicture'
 
-export default function PostForm() {
+export default function PostFormEdit() {
     const user = useUserStore(state => state.user)
     const token = useUserStore(state => state.token)
     const createPost = usePostStore(state => state.createPost)
     const getAllPosts = usePostStore(state => state.getAllPosts)
-    const [message, setMessage] = useState('')
+    const currentPost = usePostStore(state => state.currentPost)
+    const [message, setMessage] = useState(currentPost.message)
     const [addPic, setAddPic] = useState(false)
     const [file, setFile] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -20,7 +21,7 @@ export default function PostForm() {
     const hdlChange = e => {
         setMessage(e.target.value)
     }
-    const hdlCreatePost = async e => {
+    const hdlEditPost = async e => {
         try {
             setLoading(true)
             const body = new FormData()
@@ -28,11 +29,7 @@ export default function PostForm() {
             if (file) {
                 body.append('image', file)
             }
-            // for(let [key, value] of body.entries()) {
-            // 	console.log(key, value)
-            // }
-            const rs = await createPost(body, token, user)
-            // getAllPosts(token)
+           
             e.target.closest('dialog').close()
         } catch (err) {
             const errMsg = err.response?.data?.error || err.message
@@ -45,7 +42,7 @@ export default function PostForm() {
     return (
         <div className="flex flex-col gap-2">
             {loading && <span className="loading loading-dots loading-xs"></span>}
-            <h3 className="text-xl text-center">Create post</h3>
+            <h3 className="text-xl text-center">Edit post</h3>
             <div className="divider mt-1 mb-0"></div>
             <div className="flex gap-2">
                 <Avatar
@@ -84,7 +81,7 @@ export default function PostForm() {
                     </div>
                 </div>
             </div>
-            <button className={`btn btn-sm ${message.trim() ? 'btn-primary' : 'btn-disabled'}`} onClick={hdlCreatePost}>Create Post</button>
+            <button className={`btn btn-sm ${message.trim() ? 'btn-primary' : 'btn-disabled'}`} onClick={hdlEditPost}>Edit Post</button>
         </div>
     )
 }
